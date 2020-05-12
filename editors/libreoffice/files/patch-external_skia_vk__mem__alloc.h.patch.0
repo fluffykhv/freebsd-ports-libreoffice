@@ -1,0 +1,14 @@
+--- external/skia/vk_mem_alloc.h.patch.0.orig	2020-05-12 09:10:30 UTC
++++ external/skia/vk_mem_alloc.h.patch.0
+@@ -0,0 +1,11 @@
++--- third_party/vulkanmemoryallocator/include/vk_mem_alloc.h.orig	2019-09-19 09:38:01 UTC
+++++ third_party/vulkanmemoryallocator/include/vk_mem_alloc.h
++@@ -2233,7 +2233,7 @@ remove them if not needed.
++ #include <atomic> // for std::atomic
++ 
++ #if !defined(_WIN32) && !defined(__APPLE__)
++-    #include <malloc.h> // for aligned_alloc()
+++    #include <stdlib.h> // for aligned_alloc()
++ #endif
++ 
++ #ifndef VMA_NULL

@@ -6,7 +6,7 @@ MASTER_SITES=	https://download.documentfoundation.org/libreoffice/${MASTER_SITE_
 .if defined(PRERELEASE)
 MASTER_SITES+=	https://dev-builds.libreoffice.org/pre-releases/deb/x86_64/
 MASTER_SITE_SUBDIR=	testing/${PORTVERSION}/deb/x86_64
-LO_I18N_FILE=	LibreOffice_${LOVERSION}_Linux_x86-64_deb
+LO_I18N_FILE=	LibreOfficeDev_${LOVERSION}_Linux_x86-64_deb
 .else
 MASTER_SITE_SUBDIR=	stable/${PORTVERSION}/deb/x86_64
 LO_I18N_FILE=	LibreOffice_${PORTVERSION}_Linux_x86-64_deb

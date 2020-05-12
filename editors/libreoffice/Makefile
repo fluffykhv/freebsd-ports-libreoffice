@@ -81,6 +81,7 @@ LIB_DEPENDS=	libapr-1.so:devel/apr1 \
 		libraptor2.so:textproc/raptor2 \
 		librdf.so:textproc/redland \
 		libfontconfig.so:x11-fonts/fontconfig \
+		libxcb-icccm.so:x11/xcb-util-wm \
 		libserf-1.so:www/serf
 RUN_DEPENDS=	xdg-open:devel/xdg-utils \
 		${LOCALBASE}/share/fonts/Caladea/Caladea-Bold.ttf:x11-fonts/crosextrafonts-caladea-ttf \
@@ -92,6 +93,8 @@ RUN_DEPENDS=	xdg-open:devel/xdg-utils \
 		${LOCALBASE}/share/fonts/LinLibertineG/LinLibertine_DR_G.ttf:x11-fonts/linuxlibertine-g
 
 DISTFILES+=	884ed41809687c3e168fc7c19b16585149ff058eca79acbf3ee784f6630704cc-opens___.ttf:ext
+DISTFILES+=	dtoa-20180411.tgz:src
+DISTFILES+=	skia-m83-8ce842d38d0b32149e874d6855c91e8c68ba65a7.tar.xz:src
 
 NOT_FOR_ARCHS=		armv6 armv7
 NOT_FOR_ARCHS_REASON=	Unsupported host_cpu
@@ -109,7 +112,7 @@ GNU_CONFIGURE=	yes
 USE_GL=		gl glew glu
 USE_OPENLDAP=	yes
 USE_PERL5=	build
-USE_XORG=	ice sm x11 xaw xext xinerama xrandr xrender
+USE_XORG=	ice sm x11 xaw xcb xext xinerama xrandr xrender
 USES=		autoreconf:build bison compiler:c++14-lang cpe gl gmake gnome \
 		jpeg mysql:client \
 		perl5 pkgconfig python shebangfix shared-mime-info ssl tar:xz \
@@ -135,7 +138,8 @@ DOCS_CONFIGURE_WITH=	help
 
 GNOME_CONFIGURE_ENABLE=	dbus dconf
 GNOME_IMPLIES=	GTK3
-GNOME_LIB_DEPENDS=	libdbus-glib-1.so:devel/dbus-glib
+GNOME_LIB_DEPENDS=	libdbus-1.so:devel/dbus \
+			libdbus-glib-1.so:devel/dbus-glib
 GNOME_USE=	GNOME=dconf
 
 GTK3_CONFIGURE_ENABLE=	gtk3
@@ -148,11 +152,10 @@ JAVA_BUILD_DEPENDS=	ant:devel/apache-ant \
 			${JAVAJARDIR}/commons-httpclient.jar:java/apache-commons-httpclient \
 			${JAVAJARDIR}/commons-lang3.jar:java/apache-commons-lang3 \
 			${JAVAJARDIR}/commons-logging.jar:java/apache-commons-logging \
-			${JAVAJARDIR}/junit.jar:java/junit \
-			${JAVAJARDIR}/bsh.jar:lang/bsh
+			${JAVAJARDIR}/junit.jar:java/junit
+#			${JAVAJARDIR}/bsh.jar:lang/bsh
 JAVA_CATEGORIES=	java
 JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
-			--with-beanshell-jar=${JAVAJARDIR}/bsh.jar \
 			--with-commons-codec-jar=${JAVAJARDIR}/commons-codec.jar \
 			--with-commons-httpclient-jar=${JAVAJARDIR}/commons-httpclient.jar \
 			--with-commons-lang-jar=${JAVAJARDIR}/commons-lang3.jar \
@@ -160,7 +163,9 @@ JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
 			--with-jdk-home="${JAVA_HOME}" \
 			--with-junit=${JAVAJARDIR}/junit.jar \
 			--with-hamcrest=${JAVAJARDIR}/hamcrest.jar \
+			--without-system-beanshell \
 			--without-system-jfreereport
+#			--with-beanshell-jar=${JAVAJARDIR}/bsh.jar \
 JAVA_CONFIGURE_WITH=	java
 # XXX jni.h from GNU classpath causes ABI conflicts.
 JAVA_CONFLICTS_BUILD=	classpath-[0-9]*
@@ -176,6 +181,7 @@ JAVA_DISTFILES=	17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip:src \
 		a084cd548b586552cb7d3ee51f1af969-odfvalidator-1.1.8-incubating-SNAPSHOT-jar-with-dependencies.jar:ext \
 		ace6ab49184e329db254e454a010f56d-libxml-1.1.7.zip:src \
 		ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip:src \
+		beeca87be45ec87d241ddd0e1bad80c1-bsh-2.0b6-src.zip:src \
 		d8bd5eed178db6e2b18eeed243f85aa8-flute-1.1.6.zip:src \
 		db60e4fde8dd6d6807523deb71ee34dc-liblayout-0.2.10.zip:src \
 		eeb2c7ddf0d302fba4bfc6e97eac9624-libbase-1.1.6.zip:src \
