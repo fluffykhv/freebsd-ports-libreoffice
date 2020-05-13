@@ -2,11 +2,11 @@
 
 .include "${.CURDIR}/Makefile.common"
 
-MASTER_SITES=	https://download.documentfoundation.org/libreoffice/src/${PORTVERSION}/ \
+MASTER_SITES=	https://download.documentfoundation.org/libreoffice/src/${LOVERSION}/ \
 		https://dev-www.libreoffice.org/src/:src \
 		https://dev-www.libreoffice.org/extern/:ext
-DISTFILES=	${PORTNAME}-${DISTVERSION}${DISTVERSIONSUFFIX}${EXTRACT_SUFX} \
-		${PORTNAME}-help-${DISTVERSION}${DISTVERSIONSUFFIX}${EXTRACT_SUFX}
+DISTFILES=	${PORTNAME}-${DISTVERSION}${EXTRACT_SUFX} \
+		${PORTNAME}-help-${DISTVERSION}${EXTRACT_SUFX}
 DIST_SUBDIR=	libreoffice
 EXTRACT_ONLY:=	${DISTFILES}
 
@@ -104,6 +104,7 @@ MASTER_SITES+=	https://dev-builds.libreoffice.org/pre-releases/src/
 .endif
 
 INSTALL_TARGET=	distro-pack-install
+#WRKSRC=		${WRKDIR}/${PORTNAME}-${LOVERSION}
 
 SHEBANG_GLOB=	*.py
 
@@ -152,6 +153,7 @@ JAVA_BUILD_DEPENDS=	ant:devel/apache-ant \
 			${JAVAJARDIR}/commons-lang3.jar:java/apache-commons-lang3 \
 			${JAVAJARDIR}/commons-logging.jar:java/apache-commons-logging \
 			${JAVAJARDIR}/junit.jar:java/junit
+#			${JAVAJARDIR}/bsh.jar:lang/bsh
 JAVA_CATEGORIES=	java
 JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
 			--with-commons-codec-jar=${JAVAJARDIR}/commons-codec.jar \
@@ -163,6 +165,7 @@ JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
 			--with-hamcrest=${JAVAJARDIR}/hamcrest.jar \
 			--without-system-beanshell \
 			--without-system-jfreereport
+#			--with-beanshell-jar=${JAVAJARDIR}/bsh.jar \
 JAVA_CONFIGURE_WITH=	java
 # XXX jni.h from GNU classpath causes ABI conflicts.
 JAVA_CONFLICTS_BUILD=	classpath-[0-9]*
