@@ -5,8 +5,8 @@
 MASTER_SITES=	https://download.documentfoundation.org/libreoffice/src/${PORTVERSION}/ \
 		https://dev-www.libreoffice.org/src/:src \
 		https://dev-www.libreoffice.org/extern/:ext
-DISTFILES=	${PORTNAME}-${LOVERSION}${EXTRACT_SUFX} \
-		${PORTNAME}-help-${LOVERSION}${EXTRACT_SUFX}
+DISTFILES=	${PORTNAME}-${DISTVERSION}${DISTVERSIONSUFFIX}${EXTRACT_SUFX} \
+		${PORTNAME}-help-${DISTVERSION}${DISTVERSIONSUFFIX}${EXTRACT_SUFX}
 DIST_SUBDIR=	libreoffice
 EXTRACT_ONLY:=	${DISTFILES}
 
@@ -104,7 +104,6 @@ MASTER_SITES+=	https://dev-builds.libreoffice.org/pre-releases/src/
 .endif
 
 INSTALL_TARGET=	distro-pack-install
-WRKSRC=		${WRKDIR}/${PORTNAME}-${LOVERSION}
 
 SHEBANG_GLOB=	*.py
 
