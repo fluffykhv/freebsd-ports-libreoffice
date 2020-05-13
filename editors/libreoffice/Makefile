@@ -152,7 +152,6 @@ JAVA_BUILD_DEPENDS=	ant:devel/apache-ant \
 			${JAVAJARDIR}/commons-lang3.jar:java/apache-commons-lang3 \
 			${JAVAJARDIR}/commons-logging.jar:java/apache-commons-logging \
 			${JAVAJARDIR}/junit.jar:java/junit
-#			${JAVAJARDIR}/bsh.jar:lang/bsh
 JAVA_CATEGORIES=	java
 JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
 			--with-commons-codec-jar=${JAVAJARDIR}/commons-codec.jar \
@@ -164,7 +163,6 @@ JAVA_CONFIGURE_ON=	--with-ant-home=${LOCALBASE}/share/java/apache-ant \
 			--with-hamcrest=${JAVAJARDIR}/hamcrest.jar \
 			--without-system-beanshell \
 			--without-system-jfreereport
-#			--with-beanshell-jar=${JAVAJARDIR}/bsh.jar \
 JAVA_CONFIGURE_WITH=	java
 # XXX jni.h from GNU classpath causes ABI conflicts.
 JAVA_CONFLICTS_BUILD=	classpath-[0-9]*
