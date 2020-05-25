@@ -2,7 +2,7 @@
 # $FreeBSD: head/devel/glib20/Makefile 525281 2020-02-05 16:06:31Z kevans $
 
 PORTNAME=	glib
-PORTVERSION=	2.64.2
+PORTVERSION=	2.64.3
 PORTEPOCH=	1
 CATEGORIES=	devel
 MASTER_SITES=	GNOME
@@ -35,7 +35,7 @@ MESON_ARGS=	-Db_lundef=false \
 		-Dxattr=false
 BINARY_ALIAS=	python3=${PYTHON_VERSION}
 
-LIBVERSION=	0.6400.2
+LIBVERSION=	0.6400.3
 PLIST_SUB+=	LIBVERSION=${LIBVERSION}
 
 glib_MAN=	gtester.1 gtester-report.1 glib-gettextize.1
