@@ -1,0 +1,92 @@
+diff --git examples/cairotwisted.c examples/cairotwisted.c
+index d2d1cd303aac02b9dfc3480e0290b7e4b74da8d9..1572c89a92b3b7824da1bbc4db12c2b14e732134 100644
+--- examples/cairotwisted.c
++++ examples/cairotwisted.c
+@@ -234,7 +234,7 @@ parametrize_path (cairo_path_t *path)
+     case CAIRO_PATH_CLOSE_PATH:
+ 	/* Make it look like it's a line_to to last_move_to */
+ 	data = (&last_move_to) - 1;
+-	/* fall through */
++        G_GNUC_FALLTHROUGH;
+     case CAIRO_PATH_LINE_TO:
+ 	parametrization[i] = two_points_distance (&current_point, &data[1]);
+ 	current_point = data[1];
+@@ -361,7 +361,7 @@ point_on_path (parametrized_path_t *param,
+   case CAIRO_PATH_CLOSE_PATH:
+       /* Make it look like it's a line_to to last_move_to */
+       data = (&last_move_to) - 1;
+-      /* fall through */
++      G_GNUC_FALLTHROUGH;
+   case CAIRO_PATH_LINE_TO:
+       {
+ 	ratio = the_x / parametrization[i];
+diff --git meson.build meson.build
+index a0d2ecc4729c04166e3810489cf1580a5a7e706f..cd6f5ef2e6d99f5464ea39aea96c870d276d45d3 100644
+--- meson.build
++++ meson.build
+@@ -190,7 +190,7 @@ endif
+ # Dependencies
+ pango_deps = []
+ 
+-glib_req_version = '>= 2.59.2'
++glib_req_version = '>= 2.60'
+ fribidi_req_version = '>= 0.19.7'
+ libthai_req_version = '>= 0.1.9'
+ harfbuzz_req_version = '>= 2.0.0'
+diff --git pango/break.c pango/break.c
+index ca62a28f1469c76d392cc5aeb09cdcd7c61eb727..44718d82be4544146d70d7107d4c70bda235a09c 100644
+--- pango/break.c
++++ pango/break.c
+@@ -405,7 +405,7 @@ pango_default_break (const gchar   *text,
+                 GB_type = GB_Prepend;
+                 break;
+               }
+-	    /* fall through */
++            G_GNUC_FALLTHROUGH;
+ 	  case G_UNICODE_CONTROL:
+ 	  case G_UNICODE_LINE_SEPARATOR:
+ 	  case G_UNICODE_PARAGRAPH_SEPARATOR:
+@@ -421,7 +421,7 @@ pango_default_break (const gchar   *text,
+ 		GB_type = GB_ControlCRLF;
+ 		break;
+ 	      }
+-	    /* fall through */
++            G_GNUC_FALLTHROUGH;
+ 
+ 	  case G_UNICODE_OTHER_LETTER:
+ 	    if (makes_hangul_syllable)
+@@ -594,7 +594,7 @@ pango_default_break (const gchar   *text,
+ 		case G_UNICODE_CONTROL:
+ 		  if (wc != 0x000D && wc != 0x000A && wc != 0x000B && wc != 0x000C && wc != 0x0085)
+ 		    break;
+-		  /* fall through */
++                  G_GNUC_FALLTHROUGH;
+ 		case G_UNICODE_LINE_SEPARATOR:
+ 		case G_UNICODE_PARAGRAPH_SEPARATOR:
+ 		  WB_type = WB_NewlineCRLF; /* CR, LF, Newline */
+diff --git pango/pango-renderer.c pango/pango-renderer.c
+index 6c0786c5015209f3bcd5defbc9be40ccc7154a9f..539df34af567cee7c37872b35c1acaffaabd443b 100644
+--- pango/pango-renderer.c
++++ pango/pango-renderer.c
+@@ -227,7 +227,7 @@ draw_underline (PangoRenderer *renderer,
+ 				     rect->y + 2 * rect->height,
+ 				     rect->width,
+ 				     rect->height);
+-      /* Fall through */
++      G_GNUC_FALLTHROUGH;
+     case PANGO_UNDERLINE_SINGLE:
+     case PANGO_UNDERLINE_LOW:
+     case PANGO_UNDERLINE_SINGLE_LINE:
+diff --git tests/testboundaries_ucd.c tests/testboundaries_ucd.c
+index ee5617bc412fe4b0a430cdd0306d5da576b0db79..f77abdcd6544e0d6e261be7dd445575c22f4735f 100644
+--- tests/testboundaries_ucd.c
++++ tests/testboundaries_ucd.c
+@@ -104,7 +104,7 @@ parse_line (gchar *line,
+         {
+         case 0x00f7: /* DIVISION SIGN: boundary here */
+           temp_attr.bits |= bits.bits;
+-          /* fall through */
++          G_GNUC_FALLTHROUGH;
+ 
+         case 0x00d7: /* MULTIPLICATION SIGN: no boundary here */
+           break;
